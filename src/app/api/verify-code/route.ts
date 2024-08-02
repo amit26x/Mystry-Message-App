@@ -16,11 +16,15 @@ export async function POST(request: Request) {
             return Response.json(
                 {
                     success: false,
-                    message: "Error verifying user"
+                    message: "User not found"
                 },
                 {status: 500}
             )
         }
+
+
+        const isCodeValid = user.verifyCode === code
+        const isCodeNotExpired = new Date(user.veriyfCodeExpiry) > new Date()
 
     } catch (error) {
         console.error("Error verifying user", error)
